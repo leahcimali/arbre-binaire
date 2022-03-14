@@ -8,4 +8,7 @@ Vous trouverez dans ce repo :
 1- Le fichier Algo.py qui est le programme complet en python 3
 2- Un fichier .txt qui contient le programme en format algorithmique
 3- Une archive .zip qui contient un executable et les librairies compréssés pour faire fonctionner le fichier.
-4- L'installation de la version de python en cas de non fonctionnement de l'exe.
+4- L'installation de la version de python en cas de non fonctionnement de l'exe : 
+https://www.python.org/ftp/python/3.10.2/python-3.10.2-amd64.exe
+
+Enjoy :-) 
