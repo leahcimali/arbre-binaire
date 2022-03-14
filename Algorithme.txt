@@ -1,0 +1,208 @@
+Structure Arbre (val : entier ou vide, pere: Arbre ou vide, fdroit: Arbre ou vide, fgauche : Gauche ou vide)
+Debut Init          
+#pere   None si racine
+
+Procedure Init Arbre(Val,pere = None : Type Arbre)
+Fin Début
+	Arbre.pere = pere
+        Arbre.fdroit = None
+        Arbre.fgauche = None
+        Arbre.val = val
+Fin struct
+    
+Procedure ajouter(Arbre : Arbre, valu :entier):
+Début
+Arbre
+Si Arbre.val = None :
+Début si    
+Arbre.val = valu
+Sinon:
+    Si valu > self.val:
+        Début Si
+	Si Arbre.fdroit = None:
+            Début Si
+		Alors Arbre.fdroit = Arbre(valu,Arbre)
+                sinon
+                    retourner Arbre.fdroit.ajouter(valu)
+             Fin Si
+	 sinon si  valu < Arbre.val:
+                Si Arbre.fgauche = None:
+                    Début Si Alors Arbre.fgauche = Arbre(valu,Arbre)
+                Sinon:
+                    Retourner Arbre.fgauche.ajouter(valu)
+		Fin Si
+       
+	Sinon
+             Afficher("La valeur est déjà dans l'arbre!")
+	     
+	Fin Si
+Fin SI
+Fin
+	
+Fonction chercher(Arbre,valu entier):
+Début	
+	
+	
+        Si Arbre.val = valu ou Arbre.val ==None:
+          	Début Si  
+		retourner Arbre
+        sinon si valu > Arbre.val and Arbre.fdroit :
+            Retourner Arbre.fdroit.chercher(valu)
+        Sinon si valu < Arbre.val and Arbre.fgauche :
+            Retourner Arbre.fgauche.chercher(valu)
+        Sinon:
+            Retourner None
+	Fin Si
+Fin 
+Procedure supprimer(Arbre,valu entier):
+b = Arbre.chercher(valu)
+Si b:
+Début Si: 
+		Si b.fdroit = None and b.fgauche = None: #si pas de fils, on efface
+                Début Si 
+			Si b.pere:
+			Début Si
+                    		Si b.pere.fdroit = b:
+				Début Si
+                        		Arbre.chercher(valu).pere.fdroit = None
+                    		Sinon
+                        		Arbre.chercher(valu).pere.fgauche = None
+				Fin Si
+			
+                	Sinon:
+                             Arbre.val = None
+		        Fin Si
+
+	
+                Sinon si b.fdroit et b.fgauche : #si deux fils, on remplace par le min du sous arbre droit
+                Alors   
+			c = b.fgauche
+                   	Tant que c.fdroit :
+			Début Tant que
+                    		c = c.fdroit
+                	Fin tant que
+			Arbre.chercher(valu).val = c.val
+               		Si c.pere.fdroit == c:
+			Début Si
+                    		c.pere.fdroit = None
+                	Sinon:
+                    		c.pere.fgauche = None
+			Fin Si
+            	Sinon Si b.fdroit:
+		Alors
+                	c = b.fdroit  
+                	Arbre.chercher(valu).fdroit = c.fdroit
+                	Arbre.chercher(valu).fgauche = c.fgauche
+                	Arbre.chercher(valu).val = c.val
+            	Sinon :
+                	c = b.fgauche
+                	Arbre.chercher(valu).fdroit = c.fdroit
+                	Arbre.chercher(valu).fgauche = c.fgauche
+                	Arbre.chercher(valu).val = c.val
+	    	Fin Si
+Sinon:
+	Afficher("La valeur n'est pas dans l'arbre")
+Fin Si 
+Fin             
+Procedure affichecroissant(Arbre: type Arbre):
+Début        
+Si Arbre.fgauche :
+	Arbre.fgauche.affichecroissant()
+        print(Arbre.val,end=' ')
+Fin Si 
+Si Arbre.fdroit :
+    self.fdroit.affichecroissant()
+Fin Si
+Fin    
+Procedure affichedecroissant(Arbre: Type Arbre):
+Début
+Si Arbre.fdroit :
+Début Si
+Arbre.fdroit.affichedecroissant()	
+Affiche(self.val, end= ' ')
+Fin si        
+Si self.fgauche :
+Arbre.fgauche.affichedecroissant()
+Fin Si
+Fin
+
+Fonction saisir():
+x : type int
+Début
+x = Saisir("Saisir un nombre entier pour l'ajouter à l'arbre binaire de recherche :")
+retourner x
+Fin
+
+Fonction saisirsup():
+x type int
+Début    
+x = input("Saisir un nombre entier pour supprimer de l'arbre binaire de recherche :")
+retourner x
+Fin
+
+Procedure menu():
+    Affiche("Pour ajouter un nombre à l'arbre écrire: ajouter")
+    Affiche("Pour effacer un nombre de l'arbre écrire: supprimer")
+    Affiche("Pour afficher les nombres de l'arbre dans un ordre croissant écrire: croissant")
+    Affiche("Pour afficher les nombres de l'arbre dans un ordre décroissant écrire: décroissant")
+    Affiche("Pour fermer le programme écrire: fermer")
+
+
+#Programme Principale    
+x type entier, a type arbre
+Début
+Affiche("L'arbre est vide!")
+Affiche("Initialisation de l'arbre binaire:")
+x = saisir()
+a = Arbre(x)
+menu()
+Tant que Vrai : 
+Début Tant que
+    Si a est vide:
+    	Début si
+    	affiche("L'arbre est vide!")
+        affiche("Initialisation de l'arbre binaire:")
+        x = saisir()
+        a = Arbre(x)
+    Sinon:    
+        x = saisir("Saisir une commande : "	
+    Fin Si		
+	Si x == "ajouter" :
+	Début Si
+        	y = saisir()
+        	a.ajouter(y)
+        	Tant que Vrai:
+		Début tant que
+        		z = input("Continuer ? (oui ou non) : ")
+            		Si z == 'oui':	
+			Début Si:
+                		y = saisir()
+                		a.ajouter(y)
+            		Sinon Si z == 'non':
+                		Arreter Tant que
+				Fin Tant que
+			Fin Si
+    	Sinon Si x == "supprimer":
+        Début Si	
+		y = saisirsup()
+        	a.supprimer(y)
+        Tant que a Non vide:
+		Début tant que
+                z = saisir("Continuer ? (oui ou non) : ")
+                 	Si z == 'oui':
+			Début si
+                    		y= saisirsup()
+                    		a.supprimer(y)
+                	Sinon si z == 'non':
+                  		Arreter tant que/Fin tant que
+			Fin Si
+    	Sinon si x == "croissant":
+        	a.affichecroissant()
+    	Sinon si x == 'decroissant':
+        	a.affichedecroissant()
+    	Sinon si x == 'fermer':
+    Arreter tant que/ Fin tant que
+Fin
+    
+
+                
