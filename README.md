@@ -5,6 +5,7 @@ Que ce soit en ordre croissant ou décroissant selon le choix de l'utilisateur.
 On doit pouvoir aussi supprimer ou ajouter un nombre.
 
 Vous trouverez dans ce repo : 
+
 1- Le fichier Algo.py qui est le programme complet en python 3
 
 2- Un fichier .txt qui contient le programme en format algorithmique
